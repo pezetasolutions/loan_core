@@ -1,9 +1,19 @@
+using LoanCore.Data.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+{
+    options.UseNpgsql(connectionString);
+    options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+});
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34607.119
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoanCore", "LoanCore\LoanCore.csproj", "{35554ACE-4AD6-4C36-969F-2D07700D40E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoanCore", "LoanCore\LoanCore.csproj", "{35554ACE-4AD6-4C36-969F-2D07700D40E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoanCore.Data", "LoanCore.Data\LoanCore.Data.csproj", "{BB3E538B-2534-4317-BD3C-32F7B93BD741}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{35554ACE-4AD6-4C36-969F-2D07700D40E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35554ACE-4AD6-4C36-969F-2D07700D40E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35554ACE-4AD6-4C36-969F-2D07700D40E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB3E538B-2534-4317-BD3C-32F7B93BD741}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB3E538B-2534-4317-BD3C-32F7B93BD741}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB3E538B-2534-4317-BD3C-32F7B93BD741}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB3E538B-2534-4317-BD3C-32F7B93BD741}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
