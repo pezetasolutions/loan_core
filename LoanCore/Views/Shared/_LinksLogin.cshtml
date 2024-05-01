@@ -13,23 +13,23 @@
     @if (SignInManager.IsSignedIn(User))
     {
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@name @surname</a>
+            <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@name @surname</a>
 
         </li>
         <li class="nav-item">
             <form class="form-inline" asp-action="LogOut" asp-controller="Account">
-                <button type="submit" class="nav-link btn btn-link text-dark">Cerrar sesión</button>
+                <button type="submit" class="nav-link btn btn-link text-light">Cerrar sesión</button>
             </form>
         </li>
     }
     else
     {
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-action="SignUp" asp-controller="Account">Registrarse</a>
+            <a class="nav-link text-light" asp-action="SignUp" asp-controller="Account">Registrarse</a>
         </li>
 
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-action="SignIn" asp-controller="Account">Iniciar sesión</a>
+            <a class="nav-link text-light" asp-action="SignIn" asp-controller="Account">Iniciar sesión</a>
         </li>
     }
 </ul>

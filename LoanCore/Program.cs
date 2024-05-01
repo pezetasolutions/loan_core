@@ -1,6 +1,7 @@
 using LoanCore.Customs;
 using LoanCore.Data;
 using LoanCore.Data.Entities;
+using LoanCore.Data.Repositories;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -42,6 +43,8 @@ builder.Services.PostConfigure<CookieAuthenticationOptions>(IdentityConstants.Ap
     options.LoginPath = "/Account/SignIn";
     options.AccessDeniedPath = "/Account/SignIn";
 });
+
+builder.Services.AddTransient<CustomerRepository>();
 
 var app = builder.Build();
 

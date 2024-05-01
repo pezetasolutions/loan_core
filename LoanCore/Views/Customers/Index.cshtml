@@ -1,0 +1,59 @@
+﻿@using LoanCore.Data.Entities;
+
+@model List<Customer>;
+
+@{
+    ViewData["Title"] = "Clientes";
+}
+
+<style>
+    th, td {
+        text-align: center;
+    }
+</style>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <div>
+                <strong>CLIENTES</strong>
+                <a class="float-end" asp-action="Add">Agregar</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th>Teléfono</th>
+                        <th>Dirección</th>
+                        <th>Préstamos activos</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var customer in Model)
+                    {
+                        <tr>
+                            <td>@customer.FirstName</td>
+                            <td>@customer.LastName</td>
+                            <td>@customer.PhoneNumber</td>
+                            <td>@customer.Address</td>
+                            <td>
+                                <a href="#">1</a>
+                            </td>
+                            <td>
+                                <a href="#"><i class="bi bi-cash-coin" style="color: black;"></i></a>
+                                <a href="#"><i class="bi bi-send-fill" style="color: black;"></i></a>
+                                <a href="#"><i class="bi bi-pen-fill" style="color: black;"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
