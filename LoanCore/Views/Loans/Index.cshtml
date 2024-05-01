@@ -1,0 +1,62 @@
+﻿@model List<LoanViewModel>;
+
+@{
+    ViewData["Title"] = "Préstamos";
+}
+
+<style>
+    th, td {
+        text-align: center;
+    }
+
+    i {
+        color: black;
+    }
+</style>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <div>
+                <strong>PRÉSTAMOS</strong>
+                <a class="float-end" asp-action="Add">Nuevo</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Monto</th>
+                        <th>Interés</th>
+                        <th>Fecha</th>
+                        <th>Deuda actual</th>
+                        <th>Intereses pendientes</th>
+                        <th>Para liquidar</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var loan in Model)
+                    {
+                        <tr>
+                            <td>@loan.Customer.FirstName @loan.Customer.LastName</td>
+                            <td>@loan.Total.ToString("C2")</td>
+                            <td>@loan.MonthlyInterest.ToString("N2")%</td>
+                            <td>@loan.CreatedAt.ToShortDateString()</td>
+                            <td>@loan.Total.ToString("C2")</td>
+                            <td>$1,000.00</td>
+                            <td>$6,000.00</td>
+                            <td>
+                                <a href="#"><i class="bi bi-coin" title="Pago de interés"></i></a>
+                                <a href="#"><i class="bi bi-cash" title="Abono al capital"></i></a>
+                                <a href="#"><i class="bi bi-cash-stack" title="Liquidar"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>

@@ -26,7 +26,8 @@ namespace LoanCore.Controllers
                 FirstName = s.FirstName,
                 LastName = s.LastName,
                 PhoneNumber = s.PhoneNumber,
-                Address = s.Address
+                Address = s.Address,
+                LoansCount = s.Loans.Count
             }).ToList());
         }
 

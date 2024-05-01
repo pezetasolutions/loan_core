@@ -3,22 +3,22 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LoanCore.Data.Repositories
 {
-    public class CustomerRepository
+    public class LoanRepository
     {
         private readonly ApplicationDbContext _database;
 
-        public CustomerRepository(ApplicationDbContext database)
+        public LoanRepository(ApplicationDbContext database)
         {
             _database = database;
         }
 
-        public List<Customer> GetAll()
+        public List<Loan> GetAll()
         {
             try
             {
                 return _database
-                    .Customers
-                    .Include(i => i.Loans)
+                    .Loans
+                    .Include(i => i.Customer)
                     .ToList();
             }
             catch (Exception)
@@ -27,16 +27,16 @@ namespace LoanCore.Data.Repositories
             }
         }
 
-        public bool Add(string firstName, string lastName, string phoneNumber, string address)
+        public bool Add(Guid customerId, int total, double monthlyInterest)
         {
             try
             {
-                _database.Customers.Add(new Customer()
+                _database.Loans.Add(new Loan()
                 {
-                    FirstName = firstName,
-                    LastName = lastName,
-                    PhoneNumber = phoneNumber,
-                    Address = address
+                    CustomerId = customerId,
+                    Total = total,
+                    MonthlyInterest = monthlyInterest,
+                    CreatedAt = DateTime.UtcNow
                 });
 
                 return _database.SaveChanges() > 0;
@@ -51,14 +51,14 @@ namespace LoanCore.Data.Repositories
         {
             try
             {
-                var customer = _database.Customers.FirstOrDefault(f => f.Id == id);
+                var loan = _database.Loans.FirstOrDefault(f => f.Id == id);
 
-                if (customer is null)
+                if (loan is null)
                 {
                     return false;
                 }
 
-                _database.Customers.Remove(customer);
+                _database.Loans.Remove(loan);
 
                 return _database.SaveChanges() > 0;
             }

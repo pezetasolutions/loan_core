@@ -26,5 +26,6 @@ namespace LoanCore.Models
         [Required(ErrorMessage = "Debes ingresar la dirección")]
         [MaxLength(256, ErrorMessage = "Debe ser de máximo {1} caracteres")]
         public string Address { get; set; }
+        public int LoansCount { get; set; }
     }
 }
