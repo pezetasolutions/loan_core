@@ -1,6 +1,4 @@
-﻿@using LoanCore.Data.Entities;
-
-@model List<Customer>;
+﻿@model List<CustomerViewModel>;
 
 @{
     ViewData["Title"] = "Clientes";
@@ -9,6 +7,10 @@
 <style>
     th, td {
         text-align: center;
+    }
+
+    i {
+        color: black;
     }
 </style>
 
@@ -46,9 +48,8 @@
                                 <a href="#">1</a>
                             </td>
                             <td>
-                                <a href="#"><i class="bi bi-cash-coin" style="color: black;"></i></a>
-                                <a href="#"><i class="bi bi-send-fill" style="color: black;"></i></a>
-                                <a href="#"><i class="bi bi-pen-fill" style="color: black;"></i></a>
+                                <a href="#"><i class="bi bi-pen-fill"></i></a>
+                                <a href="#"><i class="bi bi-trash3-fill text-danger"></i></a>
                             </td>
                         </tr>
                     }
