@@ -61,6 +61,42 @@ namespace LoanCore.Controllers
             }
         }
 
+        [AllowAnonymous]
+        [HttpGet]
+        public IActionResult SignIn(string message = null)
+        {
+            if (!string.IsNullOrEmpty(message))
+            {
+                ViewData["message"] = message;
+            }
+
+            return View();
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<IActionResult> SignIn(SignInViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var result = await _signInManager.PasswordSignInAsync(
+                model.Email, model.Password, model.RememberMe, false);
+
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Correo o contraseña incorrecta.");
+
+                return View(model);
+            }
+        }
+
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
