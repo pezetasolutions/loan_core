@@ -1,3 +1,4 @@
+using LoanCore.Customs;
 using LoanCore.Data;
 using LoanCore.Data.Entities;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -27,7 +28,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireUppercase = false;
 })
+.AddClaimsPrincipalFactory<CustomClaimsPrincipalFactory>()
 .AddEntityFrameworkStores<ApplicationDbContext>()
 .AddDefaultTokenProviders();
 
