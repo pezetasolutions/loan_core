@@ -48,8 +48,11 @@
                                 <a href="#">1</a>
                             </td>
                             <td>
-                                <a href="#"><i class="bi bi-pen-fill"></i></a>
-                                <a href="#"><i class="bi bi-trash3-fill text-danger"></i></a>
+                                <a href="#"><i class="bi bi-cash-coin" title="Nuevo préstamo"></i></a>
+                                <a href="#"><i class="bi bi-pen-fill" title="Editar"></i></a>
+                                <form asp-action="Delete" asp-route-id="@customer.Id" style="display: inline-block;">
+                                    <button type="submit" style="padding: 0; border: 0; background-color: transparent;"><i class="bi bi-trash-fill text-danger" title="Eliminar"></i></button>
+                                </form>
                             </td>
                         </tr>
                     }

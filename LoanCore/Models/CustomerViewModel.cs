@@ -5,6 +5,8 @@ namespace LoanCore.Models
 {
     public class CustomerViewModel
     {
+        public Guid Id { get; set; }
+
         [DisplayName("Nombre (s)")]
         [Required(ErrorMessage = "Debes ingresar el nombre")]
         [MaxLength(128, ErrorMessage = "Debe ser de máximo {1} caracteres")]

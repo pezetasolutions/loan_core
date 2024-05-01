@@ -42,5 +42,26 @@ namespace LoanCore.Data.Repositories
                 return false;
             }
         }
+
+        public bool Delete(Guid id)
+        {
+            try
+            {
+                var customer = _database.Customers.FirstOrDefault(f => f.Id == id);
+
+                if (customer is null)
+                {
+                    return false;
+                }
+
+                _database.Customers.Remove(customer);
+
+                return _database.SaveChanges() > 0;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
     }
 }

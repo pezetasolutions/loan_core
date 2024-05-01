@@ -22,6 +22,7 @@ namespace LoanCore.Controllers
 
             return View(customers.Select(s => new CustomerViewModel()
             {
+                Id = s.Id,
                 FirstName = s.FirstName,
                 LastName = s.LastName,
                 PhoneNumber = s.PhoneNumber,
@@ -65,6 +66,32 @@ namespace LoanCore.Controllers
                 ModelState.AddModelError(string.Empty, ex.Message);
 
                 return View(model);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult Delete(Guid id)
+        {
+            try
+            {
+                var deleted = _customersRepository.Delete(id);
+
+                if (deleted)
+                {
+                    _flashMessageService.AddSuccess("Cliente eliminado correctamente");
+                }
+                else
+                {
+                    _flashMessageService.AddError("Ocurrió un error al intentar eliminar el cliente");
+                }
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                _flashMessageService.AddError(ex.Message);
+
+                return RedirectToAction("Index");
             }
         }
     }
