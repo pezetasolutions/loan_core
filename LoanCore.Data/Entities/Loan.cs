@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace LoanCore.Data.Entities
+﻿namespace LoanCore.Data.Entities
 {
     public class Loan
     {
@@ -9,6 +7,8 @@ namespace LoanCore.Data.Entities
         public Customer Customer { get; set; }
         public int Total { get; set; }
         public double MonthlyInterest { get; set; }
+        public Guid StatusId { get; set; }
+        public LoanStatus Status { get; set; }
         public DateTime CreatedAt { get; set; }
     }
 }

@@ -19,6 +19,7 @@ namespace LoanCore.Data.Repositories
                 return _database
                     .Loans
                     .Include(i => i.Customer)
+                    .Include(i => i.Status)
                     .ToList();
             }
             catch (Exception)

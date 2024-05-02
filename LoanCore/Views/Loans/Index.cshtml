@@ -7,6 +7,7 @@
 <style>
     th, td {
         text-align: center;
+        vertical-align: middle;
     }
 
     i {
@@ -33,8 +34,8 @@
                         <th>Interés</th>
                         <th>Fecha</th>
                         <th>Deuda actual</th>
-                        <th>Intereses pendientes</th>
-                        <th>Para liquidar</th>
+                        <th>Detalle</th>
+                        <th>Estatus</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -46,9 +47,9 @@
                             <td>@loan.Total.ToString("C2")</td>
                             <td>@loan.MonthlyInterest.ToString("N2")%</td>
                             <td>@loan.CreatedAt.ToShortDateString()</td>
-                            <td>@loan.Total.ToString("C2")</td>
-                            <td>$1,000.00</td>
-                            <td>$6,000.00</td>
+                            <td>$9,200.00</td>
+                            <td>Meses vencidos: 1<br />Intereses vencidos: $1,200.00<br />Próximo pago: 2024-06-01<br />Para liquidar: $9,200.00</td>
+                            <td>@loan.Status</td>
                             <td>
                                 <a href="#"><i class="bi bi-coin" title="Pago de interés"></i></a>
                                 <a href="#"><i class="bi bi-cash" title="Abono al capital"></i></a>

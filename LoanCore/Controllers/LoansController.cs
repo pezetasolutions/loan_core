@@ -33,6 +33,7 @@ namespace LoanCore.Controllers
                 },
                 Total = s.Total,
                 MonthlyInterest = s.MonthlyInterest,
+                Status = GetStatusName(s.Status.Name),
                 CreatedAt = s.CreatedAt
             }).ToList());
         }
@@ -74,6 +75,17 @@ namespace LoanCore.Controllers
 
                 return View(model);
             }
+        }
+
+        private string GetStatusName(string status)
+        {
+            return status switch
+            {
+                "Active" => "Activo",
+                "Paid" => "Liquidado",
+                "Late" => "Activo con retraso",
+                _ => "Desconocido"
+            };
         }
     }
 }

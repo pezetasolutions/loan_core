@@ -3,6 +3,7 @@ using System;
 using LoanCore.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace LoanCore.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240502060803_LoanStatus")]
+    partial class LoanStatus
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -105,29 +108,6 @@ namespace LoanCore.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("LoanStatuses");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("da02b6da-b09e-4deb-b9b6-e290a4ea7326"),
-                            CreatedAt = new DateTime(2024, 5, 2, 6, 18, 8, 490, DateTimeKind.Utc).AddTicks(1494),
-                            Description = "Préstamo activo",
-                            Name = "Active"
-                        },
-                        new
-                        {
-                            Id = new Guid("5ca85223-78d3-40c9-9918-28257b551aab"),
-                            CreatedAt = new DateTime(2024, 5, 2, 6, 18, 8, 490, DateTimeKind.Utc).AddTicks(1496),
-                            Description = "Préstamo liquidado",
-                            Name = "Paid"
-                        },
-                        new
-                        {
-                            Id = new Guid("3f008e1f-43a4-4127-a875-37d28e7f225b"),
-                            CreatedAt = new DateTime(2024, 5, 2, 6, 18, 8, 490, DateTimeKind.Utc).AddTicks(1497),
-                            Description = "Préstamo activo con mensualidad atrasada",
-                            Name = "Late"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

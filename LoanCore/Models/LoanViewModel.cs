@@ -15,6 +15,7 @@ namespace LoanCore.Models
         [DisplayName("Interés mensual")]
         [Required(ErrorMessage = "Debes ingresar el interés mensual")]
         public double MonthlyInterest { get; set; }
+        public string Status { get; set; }
         public DateTime CreatedAt { get; set; }
     }
 }
