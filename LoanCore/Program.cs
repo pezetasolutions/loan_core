@@ -48,6 +48,7 @@ builder.Services.PostConfigure<CookieAuthenticationOptions>(IdentityConstants.Ap
 builder.Services.AddTransient<FlashMessageService>();
 builder.Services.AddTransient<CustomerRepository>();
 builder.Services.AddTransient<LoanRepository>();
+builder.Services.AddTransient<TransactionRepository>();
 
 var app = builder.Build();
 

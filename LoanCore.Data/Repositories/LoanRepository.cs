@@ -20,6 +20,8 @@ namespace LoanCore.Data.Repositories
                     .Loans
                     .Include(i => i.Customer)
                     .Include(i => i.Status)
+                    .Include(i => i.Transactions)
+                        .ThenInclude(i => i.Type)
                     .ToList();
             }
             catch (Exception)
@@ -28,7 +30,7 @@ namespace LoanCore.Data.Repositories
             }
         }
 
-        public bool Add(Guid customerId, int total, double monthlyInterest)
+        public bool Add(Guid customerId, double total, double monthlyInterest, DateTime createdAt)
         {
             try
             {
@@ -37,7 +39,8 @@ namespace LoanCore.Data.Repositories
                     CustomerId = customerId,
                     Total = total,
                     MonthlyInterest = monthlyInterest,
-                    CreatedAt = DateTime.UtcNow
+                    StatusId = _database.LoanStatuses.FirstOrDefault(f => f.Name == "Active").Id,
+                    CreatedAt = createdAt.ToUniversalTime()
                 });
 
                 return _database.SaveChanges() > 0;

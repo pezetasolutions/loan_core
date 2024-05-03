@@ -33,7 +33,7 @@
                         <th>Monto</th>
                         <th>Interés</th>
                         <th>Fecha</th>
-                        <th>Deuda actual</th>
+                        <th>Liquida con</th>
                         <th>Detalle</th>
                         <th>Estatus</th>
                         <th>Acciones</th>
@@ -47,8 +47,8 @@
                             <td>@loan.Total.ToString("C2")</td>
                             <td>@loan.MonthlyInterest.ToString("N2")%</td>
                             <td>@loan.CreatedAt.ToShortDateString()</td>
-                            <td>$9,200.00</td>
-                            <td>Meses vencidos: 1<br />Intereses vencidos: $1,200.00<br />Próximo pago: 2024-06-01<br />Para liquidar: $9,200.00</td>
+                            <td>@loan.TotalDebt.ToString("C2")</td>
+                            <td>Días vencidos: @loan.ExpiredDays<br />Intereses por pagar: @loan.InterestToPay.ToString("C2")<br />Próximo pago: @loan.NextPay?.ToShortDateString()</td>
                             <td>@loan.Status</td>
                             <td>
                                 <a href="#"><i class="bi bi-coin" title="Pago de interés"></i></a>

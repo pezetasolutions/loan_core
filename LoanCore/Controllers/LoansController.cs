@@ -8,11 +8,13 @@ namespace LoanCore.Controllers
     public class LoansController : Controller
     {
         private readonly LoanRepository _loanRepository;
+        private readonly CustomerRepository _customerRepository;
         private readonly FlashMessageService _flashMessageService;
 
-        public LoansController(LoanRepository loanRepository, FlashMessageService flashMessageService)
+        public LoansController(LoanRepository loanRepository, FlashMessageService flashMessageService, CustomerRepository customerRepository)
         {
             _loanRepository = loanRepository;
+            _customerRepository = customerRepository;
             _flashMessageService = flashMessageService;
         }
 
@@ -32,6 +34,13 @@ namespace LoanCore.Controllers
                     Address = s.Customer.Address
                 },
                 Total = s.Total,
+                Transactions = s.Transactions.Select(t => new TransactionViewModel()
+                {
+                    Id = t.Id,
+                    Amount = t.Amount,
+                    Type = t.Type.Name,
+                    CreatedAt = t.CreatedAt
+                }).ToList(),
                 MonthlyInterest = s.MonthlyInterest,
                 Status = GetStatusName(s.Status.Name),
                 CreatedAt = s.CreatedAt
@@ -41,20 +50,25 @@ namespace LoanCore.Controllers
         [HttpGet]
         public IActionResult Add()
         {
-            return View();
+            var model = new AddLoanViewModel();
+
+            model.Customers = GetCustomers();
+
+            return View(model);
         }
 
         [HttpPost]
-        public IActionResult Add(LoanViewModel model)
+        public IActionResult Add(AddLoanViewModel model)
         {
             try
             {
                 if (!ModelState.IsValid)
                 {
-                    return View();
+                    model.Customers = GetCustomers();
+                    return View(model);
                 }
 
-                var added = _loanRepository.Add(model.Customer.Id, model.Total, model.MonthlyInterest);
+                var added = _loanRepository.Add(model.CustomerId, model.Total, model.MonthlyInterest, model.CreatedAt);
 
                 if (added)
                 {
@@ -66,6 +80,7 @@ namespace LoanCore.Controllers
                 {
                     ModelState.AddModelError(string.Empty, "Ocurrió un error al intentar agregar el préstamo");
 
+                    model.Customers = GetCustomers();
                     return View(model);
                 }
             }
@@ -73,6 +88,7 @@ namespace LoanCore.Controllers
             {
                 ModelState.AddModelError(string.Empty, ex.Message);
 
+                model.Customers = GetCustomers();
                 return View(model);
             }
         }
@@ -86,6 +102,20 @@ namespace LoanCore.Controllers
                 "Late" => "Activo con retraso",
                 _ => "Desconocido"
             };
+        }
+
+        private List<CustomerViewModel> GetCustomers()
+        {
+            var customers = _customerRepository.GetAll();
+
+            return customers.Select(s => new CustomerViewModel()
+            {
+                Id = s.Id,
+                FirstName = s.FirstName,
+                LastName = s.LastName,
+                PhoneNumber = s.PhoneNumber,
+                Address = s.Address
+            }).ToList();
         }
     }
 }

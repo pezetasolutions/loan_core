@@ -1,0 +1,54 @@
+﻿@model AddLoanViewModel;
+
+@{
+    ViewData["Title"] = "Nuevo Préstamo";
+}
+
+<div class="card">
+    <div class="card-header">
+        <strong>NUEVO PRÉSTAMO</strong>
+    </div>
+    <div class="card-body">
+        <form asp-action="Add">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="row">
+                <div class="mb-6">
+                    <label asp-for="CustomerId" class="form-label"></label>
+                    <select asp-for="CustomerId" class="form-control">
+                        <option value="">Seleccione un cliente</option>
+                        @foreach (var customer in Model.Customers)
+                        {
+                            <option value="@customer.Id">@customer.FirstName @customer.LastName</option>
+                        }
+                    </select>
+                    <span asp-validation-for="CustomerId" class="text-danger"></span>
+                </div>
+
+                <div class="mb-4">
+                    <label asp-for="Total" class="form-label"></label>
+                    <input asp-for="Total" class="form-control" />
+                    <span asp-validation-for="Total" class="text-danger"></span>
+                </div>
+
+                <div class="mb-6">
+                    <label asp-for="MonthlyInterest" class="form-label"></label>
+                    <input asp-for="MonthlyInterest" class="form-control" />
+                    <span asp-validation-for="MonthlyInterest" class="text-danger"></span>
+                </div>
+
+                <div class="mb-6">
+                    <label asp-for="CreatedAt" class="form-label"></label>
+                    <input asp-for="CreatedAt" class="form-control" />
+                    <span asp-validation-for="CreatedAt" class="text-danger"></span>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-dark mt-3">Registrar</button>
+        </form>
+
+        @section Scripts {
+            <partial name="_ValidationScriptsPartial" />
+        }
+    </div>
+</div>

@@ -25,7 +25,14 @@ namespace LoanCore.Data.Seeds
                     Id = Guid.NewGuid(),
                     Name = "Discount",
                     Description = "Descuento al interés del préstamo"
-                });
+                },
+                new TransactionType
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "PartialPay",
+                    Description = "Abono al capital"
+                }
+            );
         }
     }
 }
