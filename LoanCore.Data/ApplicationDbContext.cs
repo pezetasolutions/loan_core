@@ -12,6 +12,8 @@ namespace LoanCore.Data
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Loan> Loans { get; set; }
         public DbSet<LoanStatus> LoanStatuses { get; set; }
+        public DbSet<TransactionType> TransactionTypes { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -26,6 +28,7 @@ namespace LoanCore.Data
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
             LoanStatusSeed.Seed(builder);
+            TransactionTypeSeed.Seed(builder);
         }
     }
 }
