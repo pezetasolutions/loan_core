@@ -1,0 +1,82 @@
+﻿@model AddInterestPaymentToModifyDayViewModel;
+
+@{
+    ViewData["Title"] = "Modificar fecha de pago";
+}
+
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <div>
+                <strong>Pago de interés para cambiar fecha de pago</strong>
+            </div>
+        </div>
+        <div class="card-body">
+            <p>Al seleccionar un nuevo día de pago se calculará el interés por pagar</p>
+            <hr />
+            <div>
+                <strong>Préstamo:</strong> @Model.Loan.Customer.FirstName @Model.Loan.Customer.LastName - @Model.Loan.Total.ToString("C2") - @Model.Loan.CreatedAt.ToShortDateString()
+            </div>
+            <hr />
+            <form asp-action="AddInterestPaymentToModifyDay">
+                <div class="row">
+                    <div class="col-3 col-md-5">
+                        <label asp-for="NewDay" class="form-label"></label> - <span>Actual: 15</span>
+                        @* <input asp-for="NewDay" class="form-control" /> *@
+                        <select asp-for="NewDay" class="form-select">
+                            <option value="0">Seleccione un día</option>
+                            <option value="1">1 de cada mes</option>
+                            <option value="15" disabled="@Model.NewDay == 15 ? '' : 'disabled'" title="Actualmente el pago es este día">15 de cada mes</option>
+                        </select>
+                        <span asp-validation-for="NewDay" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-9 col-md-7">
+                        <label asp-for="InterestToPay" class="form-label"></label>
+                        <input asp-for="InterestToPay" class="form-control" disabled value="$250.00" />
+                        <span asp-validation-for="InterestToPay" class="text-danger"></span>
+                    </div>
+
+                    <p class="mt-3"><strong>NOTA: </strong>Son <span id="diffDays"></span> días de interés a @Model.DailyInterest.ToString("C2") por día. La nueva fecha de pago es los días <span id="newDaySpan"></span> de cada mes. Próximo pago del interés: <span id="nextPay"></span></p>
+                </div>
+
+                <button type="submit" class="btn btn-dark mt-3 float-end">Registrar movimiento</button>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        const url = '@Url.Action("CalculateInterest")';
+        const loanId = '@Model.Loan.Id';
+
+        transactionFormInit(url);
+
+        function transactionFormInit(url) {
+            $("#NewDay").change(async function () {
+                const newDay = $(this).val();
+
+                console.log('-- URL: ', `${url}?loanId=${loanId}&newDay=${newDay}`);
+
+                const response = await fetch(`${url}?loanId=${loanId}&newDay=${newDay}`, {
+                    method: 'GET'
+                });
+
+                const json = await response.json();
+
+                console.log(json);
+
+                console.log('InterestToPay: ', json.interestToPay);
+                console.log('New date: ', json.newDate);
+
+                $("#diffDays").text(json.diffDays);
+                $("#InterestToPay").val(`$${parseFloat(json.interestToPay).toFixed(2)}`);
+                $("#newDaySpan").text(newDay);
+                $("#nextPay").text(json.newDate.toString().substring(0, 10));
+            });
+        }
+    </script>
+}

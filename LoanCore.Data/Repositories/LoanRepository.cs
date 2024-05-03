@@ -12,6 +12,22 @@ namespace LoanCore.Data.Repositories
             _database = database;
         }
 
+        public Loan Get(Guid id)
+        {
+            try
+            {
+                return _database
+                    .Loans
+                    .Include(i => i.Customer)
+                    .Include(i => i.Status)
+                    .FirstOrDefault(w => w.Id == id);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
         public List<Loan> GetAll()
         {
             try

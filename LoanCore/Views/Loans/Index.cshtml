@@ -51,6 +51,7 @@
                             <td>Días vencidos: @loan.ExpiredDays<br />Intereses por pagar: @loan.InterestToPay.ToString("C2")<br />Próximo pago: @loan.NextPay?.ToShortDateString()</td>
                             <td>@loan.Status</td>
                             <td>
+                                <a asp-action="AddInterestPaymentToModifyDay" asp-controller="Transactions" asp-route-loanId="@loan.Id"><i class="bi bi-coin" title="Pago de interés para cambio de fecha"></i></a>
                                 <a href="#"><i class="bi bi-coin" title="Pago de interés"></i></a>
                                 <a href="#"><i class="bi bi-cash" title="Abono al capital"></i></a>
                                 <a href="#"><i class="bi bi-cash-stack" title="Liquidar"></i></a>

@@ -11,6 +11,7 @@ namespace LoanCore.Models
         [DisplayName("Total")]
         [Required(ErrorMessage = "Debes ingresar el total")]
         public double Total { get; set; }
+        public double TotalDebtWithOutInterest => GetTotalDebt();
         public double TotalDebt => GetTotalDebt() + GetInterestToPay();
 
         [DisplayName("Interés mensual")]

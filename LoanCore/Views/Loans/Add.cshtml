@@ -13,7 +13,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="row">
-                <div class="mb-6">
+                <div class="col-6">
                     <label asp-for="CustomerId" class="form-label"></label>
                     <select asp-for="CustomerId" class="form-control">
                         <option value="">Seleccione un cliente</option>
@@ -25,19 +25,19 @@
                     <span asp-validation-for="CustomerId" class="text-danger"></span>
                 </div>
 
-                <div class="mb-4">
+                <div class="col-4">
                     <label asp-for="Total" class="form-label"></label>
                     <input asp-for="Total" class="form-control" />
                     <span asp-validation-for="Total" class="text-danger"></span>
                 </div>
 
-                <div class="mb-6">
+                <div class="col-6">
                     <label asp-for="MonthlyInterest" class="form-label"></label>
                     <input asp-for="MonthlyInterest" class="form-control" />
                     <span asp-validation-for="MonthlyInterest" class="text-danger"></span>
                 </div>
 
-                <div class="mb-6">
+                <div class="col-6">
                     <label asp-for="CreatedAt" class="form-label"></label>
                     <input asp-for="CreatedAt" class="form-control" />
                     <span asp-validation-for="CreatedAt" class="text-danger"></span>
